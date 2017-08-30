@@ -23,7 +23,7 @@ var articles={
                 `
     },
     'article-two':{
-            title:"Article Two | Kalyan Siva",
+        title:"Article Two | Kalyan Siva",
         heading:"Article Two",
         date:"Sep 15, 2016",
         content:`
