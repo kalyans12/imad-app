@@ -4,6 +4,6 @@ document.getElementById('main-text').innerHTML ="My Life My Rules God Helps+':)'
 
 //Move the image
 var img = document.getElementById('img');
-img.onclick=function(){
+img.onClick=function(){
     img.style.marginleft='100px';
 };
