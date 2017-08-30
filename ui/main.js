@@ -5,5 +5,5 @@ document.getElementById('main-text').innerHTML ="My Life My Rules God Helps+':)'
 //Move the image
 var img = document.getElementById('madi');
 img.onClick=function(){
-    img.style.marginleft='100px';
+    img.style.marginLeft='100px';
 };
