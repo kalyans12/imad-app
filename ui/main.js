@@ -12,3 +12,8 @@ function moveRight(){
 img.onclick=function(){
     var interval = setInterval(moveRight,50);
 };
+var button = document.getElementById('counter');
+button.onclick = function(){
+    var livecount=document.getElementById("count").innerHTML+1;
+    return livecount;
+}
