@@ -14,6 +14,6 @@ img.onclick=function(){
 };
 var button = document.getElementById('counter');
 button.onclick = function(){
-    var livecount=document.getElementById("count").innerHTML+1;
+    document.getElementById("count").innerHTML=document.getElementById("count").innerHTML+1;
     return livecount;
 }
