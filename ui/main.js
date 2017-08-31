@@ -15,5 +15,4 @@ img.onclick=function(){
 var button = document.getElementById('counter');
 button.onclick = function(){
     document.getElementById("count").innerHTML=document.getElementById("count").innerHTML+1;
-    return livecount;
-}
+};
