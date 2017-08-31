@@ -7,7 +7,7 @@ app.use(morgan('combined'));
 
 var articles={
     'article-one':{
-        title:"Article One | Kalyan Siva",
+        titles:"Article One | Kalyan Siva",
         heading:"Article One",
         date:"Sep 5, 2016",
         content:`
@@ -23,7 +23,7 @@ var articles={
                 `
     },
     'article-two':{
-        title:"Article Two | Kalyan Siva",
+        titles:"Article Two | Kalyan Siva",
         heading:"Article Two",
         date:"Sep 15, 2016",
         content:`
@@ -39,7 +39,7 @@ var articles={
                 `
     },
     'article-three':{
-            title:"Article Three | Kalyan Siva",
+            titles:"Article Three | Kalyan Siva",
         heading:"Article Three",
         date:"Sep 25, 2016",
         content:`
@@ -57,14 +57,14 @@ var articles={
     };
 
 function createTemplate(data){
-    var title =data.title;
+    var titles =data.title;
     var date = data.date;
     var content = data.content;
     var heading = data.heading;
         var htmlTemplate =`<html>
         <head>
             <title>
-                ${title}
+                ${titles}
             </title>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <link href="/ui/style.css" rel="stylesheet" />
@@ -87,7 +87,6 @@ function createTemplate(data){
                 </div>
             </body>
         </html>
-        `
         return htmlTemplate;
 }
 
@@ -105,6 +104,12 @@ app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
+var counter =0;
+app.get('/counter',function(req,res){
+counter=counter+1;
+res.send(counter.toString());
+});
+
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
@@ -118,6 +123,4 @@ app.get('/ui/madi.png', function (req, res) {
 // Use 8080 only for local development if you already have apache running on 80
 
 var port = 80;
-app.listen(port, function () {
-  console.log(`IMAD course app listening on port ${port}!`);
-});
+app.listen(port,function(){console.log(`IMAD course app listening on port ${port}!`);});
