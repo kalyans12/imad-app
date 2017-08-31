@@ -20,3 +20,15 @@ var request = new XMLHttpRequest();//create a request variable ,
    request.send(null);
 };
 /*The thing we are making here is on click of a button we are creating  a request and making a  request to the counter end point, once the request state chnges to done and the requests status is 200 we are taking the response of the request and copied into the variable and displaying it where ever required.*/  
+//submit name 
+var nameInput = document.getElementById('name');
+var nameVal = nameInput.value;
+var submit = document.getElementById('submit_btn');
+submit.onClick = function(){
+    var names=["name1","name2","name3","name4"];
+    for(var i = 0; i<names.length;i++){
+        list += '<li>'+names[i]+'</li>';
+    }
+    var ul = document.getElementById('namelist');
+    ul.innerHtml=list;
+};
