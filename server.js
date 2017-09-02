@@ -133,7 +133,7 @@ app.get('/articles/:articleName',function(req,res){
     //articleName == article-one
     //articles[articleName]==will be the content object for article one as per express framework
 //var articleName = req.params.articleName;//functionality provided by express.js
-pool.query("select * from article where title='"+req.params.articleName+"'",function(err,result){
+pool.query("select * from article where heading='"+req.params.articleName+"'",function(err,result){
    if(err){
        res.status(500).send(error.toString());
    } 
