@@ -18,7 +18,7 @@ var articles={
         title:"Article One | Kalyan Siva",
         heading:"Article One",
         date:"Sep 5, 2016",
-        content:`
+        Content:`
                 <p>
                 This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first articleThis is the content for my first article.This is the content for my first article
                 </p>
@@ -34,7 +34,7 @@ var articles={
         title:"Article Two | Kalyan Siva",
         heading:"Article Two",
         date:"Sep 15, 2016",
-        content:`
+        Content:`
                 <p>
                 This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first articleThis is the content for my first article.This is the content for my first article
                 </p>
@@ -50,7 +50,7 @@ var articles={
             title:"Article Three | Kalyan Siva",
         heading:"Article Three",
         date:"Sep 25, 2016",
-        content:`
+        Content:`
                 <p>
                 This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first article.This is the content for my first articleThis is the content for my first article.This is the content for my first article
                 </p>
@@ -67,7 +67,7 @@ var articles={
 function createTemplate(data){
     var title =data.title;
     var date = data.date;
-    var content = data.content;
+    var content = data.Content;
     var heading = data.heading;
     var htmlTemplate =`<html>
         <head>
