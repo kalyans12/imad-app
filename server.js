@@ -2,6 +2,8 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
+var crypto = require('crypto');
+
 var config = {
   user:"kalyansiva12",
   database:"kalyansiva12",
@@ -115,6 +117,16 @@ app.get('/submit-name',function(req,res){ // /submit-name?name=xxxx
     names.push(name);
     //JSON Notation
     res.send(JSON.stringify(names));
+});
+
+function hash(input,salt){
+ ///How to create a hash for implementing hash we need crypto library and then we need to include it 
+ var hashed = crypto.pbkdf2Sync(input,salt,10000,512,'sha512');
+ return hashed.toString(hex);//output hashed value will be a sequence of bytes an dso ned to convert to hhext 
+}
+app.get('/hash/:input',function(req,res){//taking the input from the user as part of the url and then 
+   var hashedString = hash(req.params.input,'this-is-some-random-string');//applying the hash function to generate the hashed value amd then returning that as a response
+   res.send(hashedString);
 });
 
 var pool = new Pool(config);
