@@ -3,6 +3,7 @@ var morgan = require('morgan');//for having logs of our request we are using mor
 var path = require('path');
 var Pool = require('pg').Pool;//to connect our web app to the database we require this
 var crypto = require('crypto');//to have the hashing algorithm implemented on our password storages n the database we need this
+var bodyParser = require('bodyParser');
 
 var config = {//giving details about the database credentials that we are going to get connected to 
   user:"kalyansiva12",
@@ -14,6 +15,7 @@ var config = {//giving details about the database credentials that we are going 
 
 var app = express();//using express
 app.use(morgan('combined'));
+app.use(bodyParser.json());//heere we are telling our express request that in thecontent of the  request if we are seeing json content load that into the req.body variable 
 
 /*var articles={
     'article-one':{
@@ -161,6 +163,23 @@ pool.query("select * from article where heading=$1",[req.params.articleName],fun
    }
 });
 
+});
+
+
+app.post('/create-user',function(req,res){
+    //username and password we are getting
+    //if in the request content if the content is coming in the format of JSON then we need to tell the express framework to get the values of the username and password from the request body and for this we need to use bodyParser library 
+    var username = req.body.username;
+    var password = req.body.password;
+    var salt = crypto.randomBytes(128).toString('hex');
+    var dbString = hash(password,salt);
+    pool.query('INSERT INTO "user" VALUES ($1,$2)',[username,dbString],function(err,result){
+         if(err){
+            res.status(500).send(err.toString());
+        }else{
+            res.send("Usee Succesfully created"+userName);
+        }
+        });
 });
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
