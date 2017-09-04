@@ -225,7 +225,7 @@ app.post("/login",function(req,res){
                }
            }
        }
-   })
+   });
 });
 
 app.get('/ui/main.js', function (req, res) {
