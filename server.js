@@ -1,18 +1,18 @@
-var express = require('express');
-var morgan = require('morgan');
+var express = require('express');//we are using express js so including that library 
+var morgan = require('morgan');//for having logs of our request we are using morgan 
 var path = require('path');
-var Pool = require('pg').Pool;
-var crypto = require('crypto');
+var Pool = require('pg').Pool;//to connect our web app to the database we require this
+var crypto = require('crypto');//to have the hashing algorithm implemented on our password storages n the database we need this
 
-var config = {
+var config = {//giving details about the database credentials that we are going to get connected to 
   user:"kalyansiva12",
   database:"kalyansiva12",
   host:'db.imad.hasura-app.io',
   port:'5432',
-  password:process.env.DB_PASSWORD
+  password:process.env.DB_PASSWORD//securely storing a password in an emvironmental variable so that it is not acccessible to the users
 };
 
-var app = express();
+var app = express();//using express
 app.use(morgan('combined'));
 
 /*var articles={
@@ -98,30 +98,31 @@ function createTemplate(data){
             </body>
         </html>`;
         return htmlTemplate;
-}
+}//templating the data of the article content so that along with the content received the page loads automatically 
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+app.get('/', function (req, res) {//when ever we get a request normally we use this 
+  res.sendFile(path.join(__dirname, 'ui', 'index.html'));//which file to be sent as part of the above reqyest
 });
-
+//To get the number of counts we are getting to this api request
 var counter =0;
 app.get('/counter',function(req,res){
 counter=counter+1;
 res.send(counter.toString());
 });
-
+//to have the names submitted in the url as the query string as of now and display them in the ul on the form 
 var names = [];
 app.get('/submit-name',function(req,res){ // /submit-name?name=xxxx
     //Get the name from the request
-    var name = req.query.name;
-    names.push(name);
+    var name = req.query.name;//if name is passed as a query parameter instead of parameter we use query instead of params
+    names.push(name);//pushing the names in the array 
     //JSON Notation
-    res.send(JSON.stringify(names));
+    res.send(JSON.stringify(names));//response is available to the browser in terms of json and array is sent instead of objects 
 });
 
-function hash(input,salt){
+function hash(input,salt){//hashing the password for security
  ///How to create a hash for implementing hash we need crypto library and then we need to include it 
  var hashed = crypto.pbkdf2Sync(input,salt,10000,512,'sha512');//(password based key derivation function)
+ //appling the hashing algorithm on the password by appending salt value to the raw password and applying 10000 times the hashing algorithm and gettinga  512 bit or 128 byte ouputted hashed value for the password to be stored in database
  return ["pbdkf","10000",salt,hashed.toString('hex')].join('$');
  //output hashed value will be a sequence of bytes an dso ned to convert to hhext 
 }
@@ -130,7 +131,7 @@ app.get('/hash/:input',function(req,res){//taking the input from the user as par
    res.send(hashedString);
 });
 
-var pool = new Pool(config);
+var pool = new Pool(config);//whenever we want to have conection with database we create pool object and then we can have db queries with it so that we will get results as responss from the database
 app.get('/test-db',function(req,res){
     //make a select request 
     //get the response from others
