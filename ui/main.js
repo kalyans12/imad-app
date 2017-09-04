@@ -21,7 +21,7 @@ var request = new XMLHttpRequest();//create a request variable ,
 };*/
 /*The thing we are making here is on click of a button we are creating  a request and making a  request to the counter end point, once the request state chnges to done and the requests status is 200 we are taking the response of the request and copied into the variable and displaying it where ever required.*/  
 //submit name 
-var nameInput = document.getElementById('name');
+/*var nameInput = document.getElementById('name');
 var nameVal = nameInput.value;
 var submit = document.getElementById('submit_btn');
 submit.onclick = function(){
@@ -50,4 +50,27 @@ var nameInput = document.getElementById('name');
 var name = nameInput.value;
 request.open('GET',"http://kalyansiva12.imad.hasura-app.io/submit-name?name=" +name,true);
 request.send(null);
+};*/
+var submit = document.getElementById('submit_btn');
+submit.onclick = function(){
+    //create a request object 
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function(){
+       if(request.readystate ===XMLHttpRequest.DONE){
+           if(request.status===200){
+               alert("Logged IN successfully");
+           }
+           else if (request.status === 403){
+               alert("Username/Password is incorrect");
+           }
+           else if (request.status === 500){
+               alert('Something went wrong on the server');
+           }
+            
+        }
+    };
+    
 };
+//Make the request
+
+//
