@@ -204,7 +204,29 @@ app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
-
+app.post("/login",function(req,res){
+   var username = req.body.username;
+   var password = req.body.password;
+   pool.query('SELECT * FROM "user" WHERE username = $1',[username],function(err,result){
+       if(err){
+           res.status(500).send(err.toString());
+       }else{
+           if(res.rows.length===0){
+               res.send(403).send("Username/Password is invalid,Please try again");
+           }else{
+               //Match the password if there is a row with that username 
+               var dbString = result.rows[0].password;
+               var salt - dbString.split('$')[2];
+               var hashedPassword = hash(password,salt);//Creating a hash based on the password submitted and the original salt
+               if(hashedPassword === dbString){
+                   res.send('credentials correct');
+               }else{
+                   res.send(403).send('Username/Password is invalid,Please try again');
+               }
+           }
+       }
+   })
+});
 
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
