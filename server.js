@@ -121,6 +121,7 @@ app.get('/submit-name',function(req,res){ // /submit-name?name=xxxx
     res.send(JSON.stringify(names));//response is available to the browser in terms of json and array is sent instead of objects 
 });
 
+
 function hash(input,salt){//hashing the password for security
  ///How to create a hash for implementing hash we need crypto library and then we need to include it 
  var hashed = crypto.pbkdf2Sync(input,salt,10000,512,'sha512');//(password based key derivation function)
